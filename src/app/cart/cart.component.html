@@ -1,0 +1,35 @@
+<div (click)="toggleCart()" class="relative">
+    <img src="assets/icons/icon-cart.svg" alt="Cart Icon" class="w-6 h-6 md:h-5 cursor-pointer hover:brightness-50">
+    <span 
+        class="bg-orange-400 text-white text-xs text-center w-4 h-4 rounded-full absolute -top-1 -right-2">
+       {{ total }}
+    </span>
+</div>
+
+<div [ngClass]="isOpen ?' opacity-100 z-20': 'opacity-0 scale-75'" class="w-full box-border md:w-[25rem] absolute right-0 md:-right-[5rem] top-24 md:top-16 transition duration-150 ease-in">
+    <div class="bg-white mx-4 md:mx-0 p-5 shadow-xl rounded-md">
+        <h3 class="py-2 border-b-2 font-bold">Cart</h3>
+        @for (item of cart.items; track item) {
+            <div class="flex w-full gap-2 items-center my-10">
+                <img class="w-12 h-12 rounded-sm" src="assets/images/image-product-1-thumbnail.jpg">  
+                <div class="flex flex-col flex-grow mx-2 mdw-4/6 text-neutral-500 text-sm">
+                    <span>{{ item.name }} </span>
+                    <p>${{ item.price }} x {{ item.quantity }}
+                        <span class="font-bold text-neutral-900">${{ item.quantity * item.price }}</span>
+                    </p>           
+                </div>
+                <img src="assets/icons/delete.svg" alt="Delete Icon" class="w-6 h-6 text-neutral-400 cursor-pointer">
+                  
+            </div>
+        } @empty {
+            <p class="text-neutral-500 my-10 text-center">
+                Your cart is empty.
+            </p>
+        }
+        
+        <button class="w-full h-12 mb-2 rounded-md text-white font-bold bg-orange-400">
+            Checkout
+        </button>
+    </div>
+    
+</div>
